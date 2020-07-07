@@ -13,12 +13,9 @@ import { ClientConfiguration } from "../config/ClientConfiguration";
 import { TimeUtils } from "../utils/TimeUtils";
 import { ServerAuthorizationTokenResponse } from "../server/ServerAuthorizationTokenResponse";
 import { ScopeSet } from "../request/ScopeSet";
-<<<<<<< HEAD
 import { ResponseHandler } from "../response/ResponseHandler";
 import { AuthenticationResult } from "../response/AuthenticationResult";
-=======
 import { RequestThumbprint } from '../network/RequestThumbprint';
->>>>>>> 82645fe4... Post-design commit for common
 
 /**
  * OAuth2.0 Device code client
@@ -65,11 +62,11 @@ export class DeviceCodeClient extends BaseClient {
      */
     private async getDeviceCode(request: DeviceCodeRequest): Promise<DeviceCodeResponse> {
 
-        const thumbprint = new RequestThumbprint(
-            this.config.authOptions.clientId,
-            request.authority,
-            request.scopes
-        );
+        const thumbprint: RequestThumbprint = {
+            clientId: this.config.authOptions.clientId,
+            authority: request.authority,
+            scopes: request.scopes
+        };
 
         const queryString = this.createQueryString(request);
         const headers = this.createDefaultLibraryHeaders();
@@ -98,7 +95,7 @@ export class DeviceCodeClient extends BaseClient {
                 interval,
                 message
             }
-        } = await this.throttlingManager.sendPostRequest<ServerDeviceCodeResponse>(
+        } = await this.networkManager.sendPostRequest<ServerDeviceCodeResponse>(
             thumbprint,
             deviceCodeEndpoint,
             {
@@ -164,11 +161,11 @@ export class DeviceCodeClient extends BaseClient {
                         reject(ClientAuthError.createDeviceCodeExpiredError());
 
                     } else {
-                        const thumbprint = new RequestThumbprint(
-                            this.config.authOptions.clientId,
-                            request.authority,
-                            request.scopes
-                        );
+                        const thumbprint: RequestThumbprint = {
+                            clientId: this.config.authOptions.clientId,
+                            authority: request.authority,
+                            scopes: request.scopes
+                        };
                         const response = await this.executePostToTokenEndpoint(
                             this.authority.tokenEndpoint,
                             requestBody,

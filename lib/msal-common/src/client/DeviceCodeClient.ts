@@ -15,7 +15,7 @@ import { ServerAuthorizationTokenResponse } from "../server/ServerAuthorizationT
 import { ScopeSet } from "../request/ScopeSet";
 import { ResponseHandler } from "../response/ResponseHandler";
 import { AuthenticationResult } from "../response/AuthenticationResult";
-import { RequestThumbprint } from '../network/RequestThumbprint';
+import { RequestThumbprint } from "../network/RequestThumbprint";
 
 /**
  * OAuth2.0 Device code client

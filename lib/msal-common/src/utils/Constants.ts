@@ -255,10 +255,10 @@ export const ClientInfo = "client_info";
  * Constants related to throttling
  */
 export const ThrottleConstants = {
-    // Default time to throttle RequestThumbprint in milliseconds
+    // Default time to throttle RequestThumbprint in seconds
     DEFAULT_THROTTLE_TIME_SECONDS: 60,
-    // Default maximum time to throttle in milliseconds, overrides what the server sends back
+    // Default maximum time to throttle in seconds, overrides what the server sends back
     DEFAULT_MAX_THROTTLE_TIME_SECONDS: 3600,
     // Prefix for storing throttling entries
     THROTTLE_PREFIX: "throttle"
-}
+};

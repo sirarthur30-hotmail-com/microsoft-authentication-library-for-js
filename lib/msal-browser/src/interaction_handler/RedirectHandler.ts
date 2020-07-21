@@ -45,7 +45,7 @@ export class RedirectHandler extends InteractionHandler {
      * Handle authorization code response in the window.
      * @param hash
      */
-    async handleCodeResponse(locationHash: string, browserCrypto?: ICrypto): Promise<AuthenticationResult> {
+    async handleCodeResponse(locationHash: string, browserCrypto?: ICrypto, clientId?: string): Promise<AuthenticationResult> {
         // Check that location hash isn't empty.
         if (StringUtils.isEmpty(locationHash)) {
             throw BrowserAuthError.createEmptyHashError(locationHash);
@@ -68,8 +68,10 @@ export class RedirectHandler extends InteractionHandler {
         this.browserStorage.removeItem(this.browserStorage.generateCacheKey(TemporaryCacheKeys.URL_HASH));
 
         // Remove throttle if it exists
-        ThrottlingUtils.removeThrottle(this.browserStorage, this.browserStorage.getClientId(), this.authCodeRequest.authority, this.authCodeRequest.scopes);
-
+        if (clientId) {
+            ThrottlingUtils.removeThrottle(this.browserStorage, clientId, this.authCodeRequest.authority, this.authCodeRequest.scopes);
+        }
+        
         // Acquire token with retrieved code.
         const tokenResponse = await this.authModule.acquireToken(this.authCodeRequest, cachedNonce, requestState);
         this.browserStorage.cleanRequest();

@@ -85,7 +85,6 @@ export abstract class BaseClient {
         headers.set(`${AADServerParamKeys.X_CLIENT_VER}`, this.config.libraryInfo.version);
         headers.set(`${AADServerParamKeys.X_CLIENT_OS}`, this.config.libraryInfo.os);
         headers.set(`${AADServerParamKeys.X_CLIENT_CPU}`, this.config.libraryInfo.cpu);
-        headers.set(HeaderNames.X_MS_LIB_CAPABILITY, HeaderNames.X_MS_LIB_CAPABILITY_VALUE);
 
         return headers;
     }

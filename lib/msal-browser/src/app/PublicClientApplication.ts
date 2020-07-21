@@ -186,7 +186,7 @@ export class PublicClientApplication implements IPublicClientApplication {
         const currentAuthority = this.browserStorage.getCachedAuthority();
         const authClient = await this.createAuthCodeClient(currentAuthority);
         const interactionHandler = new RedirectHandler(authClient, this.browserStorage);
-        return interactionHandler.handleCodeResponse(responseHash, this.browserCrypto);
+        return interactionHandler.handleCodeResponse(responseHash, this.browserCrypto, this.config.auth.clientId);
     }
 
     /**

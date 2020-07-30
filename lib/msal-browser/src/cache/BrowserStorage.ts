@@ -167,7 +167,7 @@ export class BrowserStorage extends CacheManager {
                 return (JSON.parse(value) as AppMetadataEntity);
             }
             case CacheSchemaType.THROTTLE: {
-                return value;
+                return (JSON.parse(value) as RequestThumbprintValue);
             }
             case CacheSchemaType.TEMPORARY: {
                 const itemCookie = this.getItemCookie(key);

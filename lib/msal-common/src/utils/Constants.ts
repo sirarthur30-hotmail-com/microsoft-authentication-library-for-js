@@ -213,7 +213,7 @@ export enum Separators {
 }
 
 /**
- * Credentail Type stored in the cache
+ * Credential Type stored in the cache
  */
 export enum CredentialType {
     ID_TOKEN = "IdToken",
@@ -222,13 +222,14 @@ export enum CredentialType {
 }
 
 /**
- * Credentail Type stored in the cache
+ * Credential Type stored in the cache
  */
 export enum CacheSchemaType {
     ACCOUNT = "Account",
     CREDENTIAL = "Credential",
     APP_META_DATA = "AppMetadata",
-    TEMPORARY = "TempCache"
+    TEMPORARY = "TempCache",
+    THROTTLE = "Throttle"
 }
 
 /**
